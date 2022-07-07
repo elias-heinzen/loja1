@@ -1,9 +1,7 @@
 package main.java.br.com.alura.loja.resource;
 
 import com.thoughtworks.xstream.XStream;
-import main.java.br.com.alura.loja.dao.CarrinhoDAO;
 import main.java.br.com.alura.loja.dao.ProjetoDAO;
-import main.java.br.com.alura.loja.modelo.Carrinho;
 import main.java.br.com.alura.loja.modelo.Projeto;
 
 import javax.ws.rs.Consumes;
@@ -23,9 +21,9 @@ public class ProjetoResource {
     @Path("{id}")
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    public String busca(@PathParam("id") long id) {
+    public Projeto busca(@PathParam("id") long id) {
         Projeto projeto = new ProjetoDAO().busca(id);
-        return projeto.toXML();
+        return projeto;
     }
 
     @POST
