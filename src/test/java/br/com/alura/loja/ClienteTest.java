@@ -6,6 +6,8 @@ import main.java.br.com.alura.loja.modelo.Carrinho;
 import main.java.br.com.alura.loja.modelo.Produto;
 import main.java.br.com.alura.loja.modelo.Projeto;
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.filter.LoggingFilter;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -27,7 +29,9 @@ public class ClienteTest {
     @Before
     public void startaServidor() {
         server = Servidor.inicializaServidor();
-        this.client = ClientBuilder.newClient();
+        ClientConfig config = new ClientConfig();
+        config.register(new LoggingFilter());
+        this.client = ClientBuilder.newClient(config);
         this.target = client.target("http://localhost:8080");
     }
 
